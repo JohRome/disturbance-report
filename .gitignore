@@ -4,6 +4,23 @@
 # Log file
 *.log
 
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+
+# IntelliJ IDEA .iml files
+*.iml
+
+# Gradle and Maven specific
+.idea/modules.xml
+.gradle/
+.idea/libraries/*.xml
+.idea/libraries/*.xml
+.idea/libraries/*.xml
+.idea/libraries/*.xml
+.idea/libraries/*.xml
+
 # BlueJ files
 *.ctxt
 
