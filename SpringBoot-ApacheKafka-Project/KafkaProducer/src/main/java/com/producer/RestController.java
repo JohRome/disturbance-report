@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("api/v1/disturbance")
+@RequestMapping("api/v1/reports")
 public class RestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestController.class);
     private final KafkaProducer kafkaProducer;
@@ -19,7 +19,7 @@ public class RestController {
         this.kafkaProducer = kafkaProducer;
     }
 
-    @PostMapping("/send")
+    @PostMapping("/publish")
     public ResponseEntity<String> send(@RequestBody String jsonMessage) {
         try {
             kafkaProducer.sendToTopic(jsonMessage);
