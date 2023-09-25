@@ -25,17 +25,17 @@ public class Application {
 
         while (!isDone) {
             Output.printMenu();
-            switch (input.integerInput("Enter a choice")) {
+            switch (input.integerInput()) {
                 case 1 -> fileAComplaint();
                 case 2 -> isDone = true;
             }
         }
     }
     private void fileAComplaint() throws IOException {
-        String victimFirstName = input.stringInput("Set victim's first name");
-        String victimLastName = input.stringInput("Set victim's last name");
-        String victimAddress = input.stringInput("Set victim's address");
-        String victimEventDetails = input.stringInput("Describe the event by providing details. What happened?");
+        String victimFirstName = input.stringInput("Set victim's first name -> ");
+        String victimLastName = input.stringInput("Set victim's last name -> ");
+        String victimAddress = input.stringInput("Set victim's address -> ");
+        String victimEventDetails = input.stringInput("Describe the event by providing details. What happened? ->");
 
         Serialized reportForm =  new ReportDTO(victimFirstName, victimLastName, victimAddress, victimEventDetails);
 

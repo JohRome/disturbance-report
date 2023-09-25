@@ -13,7 +13,7 @@ public class Input {
 
     public String stringInput(String prompt) {
         String stringInput;
-        Output.printPrompt(prompt + " -> ");
+        Output.printPrompt(prompt);
 
 
         while (true) {
@@ -27,16 +27,16 @@ public class Input {
         }
     }
 
-    public int integerInput(String prompt) {
+    public int integerInput() {
         int integerInput;
-        Output.printPrompt(prompt + " -> ");
+//        Output.printPrompt(prompt);
 
 
         try {
             integerInput = Integer.parseInt(userInput.nextLine());
         } catch (NumberFormatException e) {
             Output.printError("Input mismatch! Try again, fool\n");
-            integerInput = integerInput(prompt);
+            integerInput = integerInput();
         }
         return integerInput;
     }
