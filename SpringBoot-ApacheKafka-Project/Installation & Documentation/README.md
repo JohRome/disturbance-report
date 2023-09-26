@@ -33,9 +33,9 @@ With minimal effort, the user is able to file a report and send it to the landlo
 *To run the application, do the following:*
 + Open the directory where you extracted the Apache Kafka files and run the following commands in the terminal:
     + `bin/zookeeper-server-start.bat config/zookeeper.properties`
-    + `bin/kafka-server-start.bat config/server.properties` (*Optional: To set up more Brokers, create 3 different copies of "server.properties" and change their name to your befitting. Head over to this project's \Installation & Documentat\Broker Config-folder and copy the content, one for each new Broker*)
+    + `bin/kafka-server-start.bat config/server.properties` (*Optional: To set up more Brokers, create 3 different copies of "server.properties" and change their name to your befitting. Head over to this project's "\Installation & Documentation\Brokers Config"-folder and copy the content, one for each new Broker*)
 + Open your MongoDB Compass and create a new database called "disturbance-reporter".
-+ Open this project in your IntelliJ IDEA and head over to the "Services"-tab located on the bottom-left corner. You should see the following:
++ Open this project in your IntelliJ IDEA and head over to the "Services"-tab located in the bottom-left corner. You should see the following:
 ![Services: ConsumerApp, PostApp, ProducerApp](Usage/services.png)
 + Either right-click on Spring Boot and click on "Run" or manually run the following applications in the following order:
     + ProducerApp
