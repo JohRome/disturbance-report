@@ -7,7 +7,6 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class TopicConfig {
-
     @Bean
     public NewTopic reportsTopic() {
         return TopicBuilder
