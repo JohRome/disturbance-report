@@ -1,4 +1,9 @@
 ## **Johan's Disturbance Reporter**
+![Java 100%](https://img.shields.io/badge/Java-100%25-%23E57300)
+![Maven](https://img.shields.io/badge/Maven-%238a6ac8?style=for-the-badge&logo=apache-maven&logoColor=white)
+![MongoDB Localhost](https://img.shields.io/badge/MongoDB-Localhost-<custom_color_code>?style=for-the-badge&logo=mongodb&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-%23FF5722?style=for-the-badge&logo=apache-kafka&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-%23009639?style=for-the-badge&logo=spring&logoColor=white)
 
 ---
 ### Description
@@ -14,6 +19,7 @@ With minimal effort, the user is able to file a report and send it to the landlo
 + [Credits](#credits)
 + [Dependencies](#dependencies)
 + [License](#license)
++ [Badges](#badges)
 
 ---
 ### Installation
@@ -46,5 +52,17 @@ With minimal effort, the user is able to file a report and send it to the landlo
 
 ---
 ### Dependencies
-+ [Spring Boot Starter Web -> 3.1.4](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/3.1.4)
-+ [Spring Kafka]()
++ [Spring Boot Starter Web 3.1.4](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/3.1.4)
++ [Spring Kafka 3.0.11](https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka/3.0.11)
++ [Lombok 1.18.30](https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.30)
++ [Spring Boot Starter Test 3.1.4](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test/3.1.4)
++ [Spring Boot Kafka Test 3.0.11](https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-test/3.0.11)
++ [Spring Boot Starter Data MongoDB 3.1.4](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb/3.1.4)
++ [Mongo Driver Sync 4.10.2](https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync)
++ [Mongo Driver Core 4.10.2](https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core)
++ [Logback Classic 1.4.11](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.4.11)
++ [Apache Http Client5 5.2.1](https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5)
+
+---
+### License
+Apache License 2.0
