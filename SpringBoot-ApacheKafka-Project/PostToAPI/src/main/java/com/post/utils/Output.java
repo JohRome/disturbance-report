@@ -11,13 +11,6 @@ public class Output {
                 2 - Exit program
                 ----------------------------------------- MAKE A CHOICE ------------------------------------------------
                 """);
-//
-//        System.out.println("-------------MENU--------------");
-//        System.out.println("""
-//                1 - Disturbing neighbour? Are you sleepless at night because of noises? Don't worry, just file a complaint
-//                2 - Exit program
-//                """);
-//        System.out.println("------------MAKE A CHOICE----------");
     }
     public static void printPrompt(String prompt) {
         System.out.print(prompt);
