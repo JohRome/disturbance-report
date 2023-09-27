@@ -11,8 +11,8 @@ public class TopicConfig {
     public NewTopic reportsTopic() {
         return TopicBuilder
                 .name("disturbance-reports")
-                .replicas(4)
-                .partitions(4)
+                .replicas(3)
+                .partitions(3)
                 .build();
     }
 }
