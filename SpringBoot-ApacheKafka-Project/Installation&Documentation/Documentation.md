@@ -45,11 +45,12 @@ Min första lösning var att ha 3 olika program. Ett program skulle sköta Apach
 Detta visade sig bli otroligt rörigt, pga att du och jag som användare, blev då tvungna att ha flera fönster uppe och körandes samtidigt.
 Jag valde därför att göra om programmet till ett enda program, där allt sköts i ett och samma fönster. Detta gjorde att jag kunde få en bättre överblick över vad som hände i programmet och det blev även lättare att felsöka.
 ## Slutsatser
-
+Överlag är jag mycket visare och klokare än vad jag var när jag precis började med projektet. Detta är något jag kommer att ta med mig som minne och vidareutveckla på ännu mer i kommande kurser och i arbetslivet.
+Programmet i sin helhet är ganska okomplicerat och det är lätt att förstå vad som händer. Att följa med i koden är inte heller så svårt.
 ### Vad gick bra
-
+Något som gick bra var egentligen allt utom planering av moduler i tidigare försök till skapande av projektet. Jag har lärt mig att jag inte ska komplicera saker mer än vad som är nödvändigt.
 ### Vad gick dåligt
-
+Något som var dåligt är helt klart att jag inte lyckats få löst Broker2-problemet. När detta är löst kommer vilken Broker som helst kunna ta över rollen som ledare och medför en större säkerhet i programmet. 
 ### Vad har du lärt dig
 
 ### Vad hade ni gjort annorlunda om ni gjort om projektet
