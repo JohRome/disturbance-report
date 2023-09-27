@@ -37,10 +37,13 @@ Något som var besvärligt till en början var även att låta en modul ha en an
   + Output - *Skriver ut menyalternativ för användaren samt meddelar om input är ej korrekt*
 
 ### Beskriv något som var besvärligt att få till
-
+Implementationen av POST-request var ganska besvärlig. Det blev en hel del problem innan jag kom på att jag behövde annotera DTO-klassen med @JsonProperty. Detta gjorde att jag kunde få till en fungerande POST-request.
+Något som har varit smått frustrerande och irriterande var återigen, modulerna. Vidare förklaring om detta nedan.
+Det som än idag skaver är att jag inte lyckats automatisera ledarbytet när en Broker försvinner. I mitt fall är det Broker2 som måste överleva för att programmet ska kunna köras och för att MongoConsumer måste kunna fungera. Stänger man av Broker1 och Broker3 så fungerar fortfarande programmet men låter man dessa vara uppe utan Broker2 fungerar inte programmet öht. Detta medför att programmet måste förlita sig på att Broker2 är uppe och körandes. Detta är något jag vill lösa i framtiden.
 ### Beskriv om du fått byta lösning och varför i sådana fall
-
-
+Min första lösning var att ha 3 olika program. Ett program skulle sköta Apache Kafka, ett program skulle sköta allt med POST-request samt att låta användaren fylla i formuläret, ett program skulle låta en användare, som i själva verket skulle vara en "hyresvärd"/"styrelse", utföra CRUDL-operationer mot databasen för att bla kunna markera ärendet som löst, aka IsSolved = true.
+Detta visade sig bli otroligt rörigt, pga att du och jag som användare, blev då tvungna att ha flera fönster uppe och körandes samtidigt.
+Jag valde därför att göra om programmet till ett enda program, där allt sköts i ett och samma fönster. Detta gjorde att jag kunde få en bättre överblick över vad som hände i programmet och det blev även lättare att felsöka.
 ## Slutsatser
 
 ### Vad gick bra
