@@ -21,13 +21,13 @@ public class Application {
 
 
     private void startApp() throws IOException {
-        boolean isDone = false;
 
-        while (!isDone) {
+
+        while (true) {
             Output.printMenu();
             switch (input.integerInput()) {
                 case 1 -> fileAComplaint();
-                case 2 -> isDone = true;
+                case 2 -> System.exit(0);
             }
         }
     }

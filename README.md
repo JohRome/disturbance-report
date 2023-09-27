@@ -27,6 +27,7 @@ With minimal effort, the user is able to file a report and send it to the landlo
 + [Apache Kafka](https://www.apache.org/dyn/closer.cgi?path=/kafka/3.5.0/kafka_2.13-3.5.0.tgz) - Download the latest version of Apache Kafka and extract the files to a directory of your choice.
 + [MongoDB Community Server](https://www.mongodb.com/try/download/community) - Download the latest version of MongoDB and install it. Make sure to install the MongoDB Compass as well, when asked by the installation wizard.
 + Clone this GitHub repository to your computer.
++ 
 ---
 ### Usage (For Windows)
 *To run the application, do the following:*

@@ -17,6 +17,5 @@ public class PostApp implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         new Application(new ApacheKafkaAPI(), new Input());
-
     }
 }
