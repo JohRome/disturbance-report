@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Output {
+    // TODO: change sout to log.info
     public static void printMenu() {
         log.info("""
                 ----------------------------------------- MENU OPTIONS -------------------------------------------------

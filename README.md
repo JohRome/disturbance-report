@@ -27,9 +27,9 @@ With minimal effort, the user is able to file a report and send it to the landlo
 + [Apache Kafka](https://www.apache.org/dyn/closer.cgi?path=/kafka/3.5.0/kafka_2.13-3.5.0.tgz) - Download the latest version of Apache Kafka and extract the files to a directory of your choice.
 + [MongoDB Community Server](https://www.mongodb.com/try/download/community) - Download the latest version of MongoDB and install it. Make sure to install the MongoDB Compass as well, when asked by the installation wizard.
 + Clone this GitHub repository to your computer.
-+ This application uses 3 separate Kafka Brokers. To set up this do the following:
-  + Head over to your Apache Kafka directory and make 3 copies of "server.properties" and rename them to "server1.properties", "server2.properties" and "server3.properties", or whatever you prefer. 
-  + After you've done that, head over to SpringBoot-ApacheKafka-Project/Installation&Documentation/Brokers Config and copy-paste the content to each broker you just created.
++ This application uses 3 separate Kafka Brokers. To set this up, do the following:
+  + Head over to your Apache Kafka directory's config folder and make 3 copies of "server.properties" and rename them to "server1.properties", "server2.properties" and "server3.properties", or whatever you prefer. 
+  + After you've done that, head over to this SpringBoot-ApacheKafka-Project/Installation&Documentation/Brokers Config and copy-paste the content to each broker you just created.
 ---
 ### Usage (For Windows)
 *To run the application, do the following:*
