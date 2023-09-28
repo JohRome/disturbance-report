@@ -6,7 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+/**
+ * Entity class representing a report in a MongoDB collection.
+ */
 @Setter
 @Getter
 @ToString
@@ -14,6 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "reports")
 public class ReportEntity {
 
+    /**
+     * The unique identifier for the report.
+     */
     @Id
     private String id;
     private String victimFirstName;
@@ -21,5 +26,4 @@ public class ReportEntity {
     private String address;
     private String eventDetails;
     private boolean isSolved;
-
 }

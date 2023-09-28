@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class responsible for consuming messages from a Kafka topic and saving them to MongoDB.
+ */
 @Service
 public class MongoConsumer {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MongoConsumer.class);
     private final ObjectMapper objectMapper;
     private final ReportRepository reportRepository;
@@ -22,6 +26,11 @@ public class MongoConsumer {
         this.reportRepository = reportRepository;
     }
 
+    /**
+     * Kafka listener method that consumes messages from the "disturbance-reports" topic.
+     *
+     * @param jsonMessage The JSON message received from Kafka.
+     */
     @KafkaListener(topics = "disturbance-reports", groupId = "mongo")
     public void mongoSave(String jsonMessage) {
         if (isJsonCorrect(jsonMessage)) {
@@ -36,7 +45,15 @@ public class MongoConsumer {
             LOGGER.info("Error with JSON parsing");
         }
     }
+
+    /**
+     * Checks if a JSON message is correct (not null or empty).
+     *
+     * @param jsonMessage The JSON message to be checked.
+     * @return True if the JSON message is correct, otherwise false.
+     */
     public boolean isJsonCorrect(String jsonMessage) {
         return jsonMessage != null && !jsonMessage.isEmpty();
     }
 }
+

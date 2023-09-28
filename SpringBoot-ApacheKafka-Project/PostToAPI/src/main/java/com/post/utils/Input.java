@@ -3,18 +3,30 @@ package com.post.utils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
+/**
+ * Utility class for user input handling, providing methods for reading strings and integers from the console.
+ */
 @Slf4j
 public class Input {
 
     private final Scanner userInput;
+
+    /**
+     * Constructor for Input, initializes the Scanner for user input.
+     */
     public Input() {
         this.userInput = new Scanner(System.in);
     }
 
+    /**
+     * Reads a string input from the user with a given prompt.
+     *
+     * @param prompt The prompt to display to the user.
+     * @return The string input provided by the user.
+     */
     public String stringInput(String prompt) {
         String stringInput;
         Output.printPrompt(prompt);
-
 
         while (true) {
             stringInput = userInput.nextLine();
@@ -23,14 +35,17 @@ public class Input {
             if (isCorrect)
                 return stringInput;
             else
-                Output.printError("Input mismatch! Try again, fool-> ");
+                Output.printError("Input mismatch! Try again, fool -> ");
         }
     }
 
+    /**
+     * Reads an integer input from the user.
+     *
+     * @return The integer input provided by the user.
+     */
     public int integerInput() {
         int integerInput;
-//        Output.printPrompt(prompt);
-
 
         try {
             integerInput = Integer.parseInt(userInput.nextLine());
@@ -41,3 +56,4 @@ public class Input {
         return integerInput;
     }
 }
+
