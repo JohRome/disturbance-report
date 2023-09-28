@@ -76,7 +76,15 @@ Något som gick bra var egentligen allt utom planering av moduler i tidigare fö
 ### Vad gick dåligt
 Något som var dåligt är helt klart att jag inte lyckats få löst Broker2-problemet. När detta är löst kommer vilken Broker som helst kunna ta över rollen som ledare och medför en större säkerhet i programmet. 
 ### Vad har du lärt dig
-
-### Vad hade ni gjort annorlunda om ni gjort om projektet
-
+Jag har lärt mig otroligt mycket under projektets gång och för att inte lista upp allting så listar jag upp enbart det viktigaste:
++ En grundlig överblick över hur man kan använda Spring Boot för att lätt kunna skriva en applikation från grunden.
++ Att kunna sätta upp ett Apache Kafka-kluster med 3 Brokers för att få en högre säkerhet i programmet.
++ Att kunna sätta upp ett API med hjälp av Spring Boot för att kunna ta emot data från en användare.
++ Att kunna skicka data från en användare, från en klient, till en server med hjälp av Apache Kafka som integrationslösning.
++ Förstå kraften av Spring Boot applikationer och hur mycket "hjälp på vägen" det medför när mycket av koden är redan skriven och med hjälp av @Annoteringar kunna diktera hur koden ska bete sig.
++ Förstå hur viktigt det är att ha tydliga ansvarsområden för varje modul och att inte låta en modul göra för mycket.
+### Vad hade du gjort annorlunda om du gjort om projektet
+Hade jag börjat om projektet från grunden hade jag helt klart velat implementera min första lösning; att ha olika program för de olika användningsområdena. Detta hade gjort programmet mer modulärt och efterliknat "Microservice Architecture", vilket är ett koncept jag kommer på egen hand utforska i.
 ### Vilka möjligheter ser du med de kunskaper du fått under kursen.
+Efter snart avslutad kurs har jag fått en bra grund att stå på vad gäller integrationsplattformar. Just integrationsplattformar har öppnat upp en helt ny värld av vad som är möjligt att göra med, i detta fall, Apache Kafka.
+Jag ser fram emot att få utforska mer av Apache Kafka och dess möjligheter, samt att få utforska andra integrationsplattformar.
