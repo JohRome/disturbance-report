@@ -1,5 +1,6 @@
 package com.producer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
  */
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/v1/reports")
+@Slf4j
 public class RestController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RestController.class);
     private final KafkaProducer kafkaProducer;
     public RestController(KafkaProducer kafkaProducer) {
         this.kafkaProducer = kafkaProducer;
@@ -32,10 +32,9 @@ public class RestController {
     public ResponseEntity<String> send(@RequestBody String jsonMessage) {
         try {
             kafkaProducer.sendToTopic(jsonMessage);
-            LOGGER.info("JSON message sent to the topic");
             return ResponseEntity.ok("JSON message sent to topic");
         } catch (ResponseStatusException e) {
-            LOGGER.error("Controller error -> ", e);
+            log.error("Controller error -> ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error");
         }
     }

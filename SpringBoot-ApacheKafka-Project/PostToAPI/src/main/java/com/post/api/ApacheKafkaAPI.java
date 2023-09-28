@@ -34,6 +34,7 @@ public class ApacheKafkaAPI implements Sender {
         String baseURI = "http://localhost:8080/api/v1/reports/";
         String kafkaAPI = baseURI + endpoint;
 
+        // creating an HTTP client and setting appropriate content type value to be sent
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost(kafkaAPI);
             httpPost.setHeader("Content-Type", "application/json; utf-8");
@@ -41,12 +42,13 @@ public class ApacheKafkaAPI implements Sender {
             StringEntity stringEntity = new StringEntity(jsonMessage);
             httpPost.setEntity(stringEntity);
 
+            // executing the POST request and checking the response code
             try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
                 int httpResponseCode = response.getCode();
                 if (httpResponseCode == 200)
                     log.info("Response code: " + httpResponseCode + " - POST request was successful");
             } catch (HttpResponseException | HttpHostConnectException e) {
-                log.error("POST request was unsuccessful for reason -> " + e.getMessage(), e.getCause());
+                log.info("POST request was unsuccessful for reason -> " + e.getMessage(), e.getCause());
             }
         }
     }
@@ -66,7 +68,7 @@ public class ApacheKafkaAPI implements Sender {
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             jsonInputString = objectMapper.writeValueAsString(dto);
         } catch (JsonProcessingException e) {
-            e.getMessage();
+            log.info("JSON parsing exception -> " + e.getMessage());
         }
         return jsonInputString;
     }
