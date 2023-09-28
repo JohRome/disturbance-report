@@ -16,6 +16,7 @@ With minimal effort, the user is able to file a report and send it to the landlo
 ### Table of Contents
 + [Installation](#installation)
 + [Usage](#usage)
++ [Troubleshooting](#troubleshooting)
 + [Credits](#credits)
 + [Dependencies](#dependencies)
 + [License](#license)
@@ -48,6 +49,22 @@ With minimal effort, the user is able to file a report and send it to the landlo
 + If your settings are correct, you should be able to left-click on the "PostApp"-service and see the following:
 <br>![Menu options](SpringBoot-ApacheKafka-Project/Installation&Documentation/Usage/postapp.png)
 
+---
+### Troubleshooting
+Sometimes, things go wrong for whatever reason. The most common of reasons, that I've experienced are the following:
++ **Maven related problems:**
+  + Make sure you have the correct JDK installed. This application uses JDK 21.
+  + Reload the Maven project by right-clicking on the project and click on "Maven" -> "Reload Project".
+  + Or reload each module separately by right-clicking on each module and click on "Maven" -> "Reload Project".
++ **Apache Kafka related problems:**
+  + Make sure you've followed the [Installation](#installation) guide correctly.
+  + Make sure you've started the ZooKeeper and each Broker correctly.
+  + In your directory where you extracted the Apache Kafka files, delete the "logs"-folders. This will reset the logs and might solve your problem.
++ **MongoDB related problems:**
+  + Make sure you've followed the [Installation](#installation) guide correctly.
+  + Make sure you've started the MongoDB Community Server correctly.
+  + Make sure you've started the MongoDB Compass correctly.
+  + Make sure you've connected to your localhost MongoDB correctly.
 ---
 ### Credits
 + [ChatGPT 3.5](https://chat.openai.com/) - For answering my questions when brain fog was present. For documenting the code.
