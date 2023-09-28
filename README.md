@@ -50,7 +50,7 @@ With minimal effort, the user is able to file a report and send it to the landlo
 
 ---
 ### Credits
-+ [ChatGPT 3.5](https://chat.openai.com/) - For asking questions and getting answers.
++ [ChatGPT 3.5](https://chat.openai.com/) - For answering my questions when brain fog was present. For documenting the code.
 + [Emil Sivertsson](https://github.com/Emilsivertsson) - For being a supportive colleague and helping me with unclear questions regarding POST-requests, Module hassles and more.
 + [Kristoffer Larsson](https://github.com/KoffaRn) - For being a supportive colleague and helping me with unclear questions regarding Module hassles, (de)serialization, code reviews and more.
 
