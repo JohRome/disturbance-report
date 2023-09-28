@@ -28,7 +28,8 @@ Något som var besvärligt till en början var även att låta en modul ha en an
   + MongoConsumer:
     + *Lösning:* Lyssnar på en angiven topic och hämtar data i JSON-format, utför en enklare kontroll av JSON så att allt stämmer och skickas sedan in i MongoDB samt fångar upp eventuella fel.
     + *Motivering:* Jag valde att göra en enklare kontroll av JSON-formatet för att förhindra att programmet kraschar samt att det tas emot som en JSON-sträng istället för ett Java-objekt. Detta medförde en större simplicitet för mig som utvecklare, dels på klient-sidan så som på server-sidan genom att låta MongoConsumer mappa om JSON till en ReportEntity. Felhantering är även viktigt för att förhindra att programmet kraschar.
-  + ReportRepository - *Gör det möjligt för MongoConsumer att enkelt spara data i MongoDB*
+  + ReportRepository:
+    + *Lösning:* Gör det möjligt för MongoConsumer att enkelt spara data i MongoDB
 + **KafkaProducer-modulen**
   + KafkaProducer:
     + *Lösning:* Ansvarar för att skicka data, genom en JSON-sträng som inparameter, till en specifik Topic med hjälp av en MessageBuilder. Ansvarar även för att fånga upp eventuella fel så att program inte kraschar*
