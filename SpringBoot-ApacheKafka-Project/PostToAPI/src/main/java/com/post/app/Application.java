@@ -30,7 +30,7 @@ public class Application {
         while (true) {
             Output.printMenu();
             switch (input.integerInput()) {
-                case 1 -> fileAComplaint();
+                case 1 -> fileADisturbanceReport();
                 case 2 -> System.exit(0);
             }
         }
@@ -41,12 +41,13 @@ public class Application {
      *
      * @throws IOException If an IO error occurs.
      */
-    private void fileAComplaint() throws IOException {
+    private void fileADisturbanceReport() throws IOException {
         String victimFirstName = input.stringInput("Set victim's first name -> ");
         String victimLastName = input.stringInput("Set victim's last name -> ");
         String victimAddress = input.stringInput("Set victim's address -> ");
-        String victimEventDetails = input.stringInput("Describe the event by providing details. What happened? ->");
+        String victimEventDetails = input.stringInput("Describe the event by providing details. What happened? -> ");
 
+        // id and isSolved are not supposed to be set, because they're handled by MongoConsumer.class
         Serialized reportForm =  new ReportDTO(victimFirstName, victimLastName, victimAddress, victimEventDetails);
 
         String json = apacheKafkaAPI.serializeToJSON(reportForm);

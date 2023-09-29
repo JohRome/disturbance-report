@@ -30,6 +30,7 @@ public class Input {
 
         while (true) {
             stringInput = userInput.nextLine();
+            // regex is used here to check for unwanted characters, which are not supported by the HTTP Client
             boolean isCorrect = !stringInput.isEmpty() && !stringInput.isBlank() && !stringInput.matches(".*[åäö].*");
 
             if (isCorrect)
@@ -48,6 +49,7 @@ public class Input {
         int integerInput;
 
         try {
+            // .nextLine() is used here instead of .nextInt() because of unwanted code jumps
             integerInput = Integer.parseInt(userInput.nextLine());
         } catch (NumberFormatException e) {
             Output.printError("Input mismatch! Try again, fool\n");

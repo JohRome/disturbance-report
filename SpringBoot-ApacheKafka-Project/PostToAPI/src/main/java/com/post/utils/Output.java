@@ -26,7 +26,8 @@ public class Output {
      * @param prompt The prompt message to be displayed.
      */
     public static void printPrompt(String prompt) {
-        log.info(prompt);
+        // sout instead of log is used here because of unwanted line breaks
+        System.out.print(prompt);
     }
 
     /**
