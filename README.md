@@ -32,7 +32,7 @@ With minimal effort, the user is able to file a report and send it to the landlo
 + Clone this GitHub repository to your computer.
 + This application uses 3 separate Kafka Brokers. To set this up, do the following:
   + Head over to your Apache Kafka directory's config folder and make 3 copies of "server.properties" and rename them to "server1.properties", "server2.properties" and "server3.properties", or whatever you prefer. 
-  + After you've done that, head over to [Brokers Config](SpringBoot-ApacheKafka-Project/Installation&Documentation/Brokers Config) and copy-paste the content from Broker1, Broker2 and Broker3 to each broker you just created. Be sure that you are not specifying my personal directory, but your own, inside each broker.properties file.
+  + After you've done that, head over to [Brokers Config](SpringBoot-ApacheKafka-Project/Installation&Documentation/BrokersConfig) and copy-paste the content from Broker1, Broker2 and Broker3 to each broker you just created. Be sure that you are not specifying my personal directory, but your own, inside each broker.properties file.
 ---
 ### Usage (For Windows)
 *To run the application, do the following:*
