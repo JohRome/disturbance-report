@@ -1,6 +1,7 @@
 package com.post.app;
 
 import com.post.api.ApacheKafkaAPI;
+import com.post.consumer.ConsoleConsumer;
 import com.post.dtos.ReportDTO;
 import com.post.interfaces.Sender;
 import com.post.interfaces.Serialized;
@@ -33,7 +34,8 @@ public class Application {
             Output.printMenu();
             switch (input.integerInput()) {
                 case 1 -> fileADisturbanceReport();
-                case 2 -> System.exit(0);
+                case 2 -> ConsoleConsumer.printAllMessagesInTopic("disturbance-reports");
+                case 3 -> System.exit(0);
             }
         }
     }
