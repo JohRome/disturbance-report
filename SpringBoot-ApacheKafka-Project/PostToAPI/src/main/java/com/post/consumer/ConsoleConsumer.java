@@ -31,7 +31,7 @@ public class ConsoleConsumer {
      *
      * @param jsonMessage The JSON message received from Kafka.
      */
-    @KafkaListener(topics = "disturbance-reports", groupId = "console")
+    @KafkaListener(topics = "disturbance-reports", groupId = "console") // TODO: Think about if this method even needs to exist
     public void printToConsole(String jsonMessage) {
         LOGGER.info("This was consumed -> {}", jsonMessage);
     }

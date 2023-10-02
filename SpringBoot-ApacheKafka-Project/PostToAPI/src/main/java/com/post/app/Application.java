@@ -34,7 +34,7 @@ public class Application {
             Output.printMenu();
             switch (input.integerInput()) {
                 case 1 -> fileADisturbanceReport();
-                case 2 -> ConsoleConsumer.printAllMessagesInTopic("disturbance-reports");
+                case 2 -> ConsoleConsumer.printAllMessagesInTopic("disturbance-reports", "all-messages");
                 case 3 -> System.exit(0);
             }
         }
