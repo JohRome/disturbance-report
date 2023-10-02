@@ -2,6 +2,7 @@ package com.post.app;
 
 import com.post.api.ApacheKafkaAPI;
 import com.post.dtos.ReportDTO;
+import com.post.interfaces.Sender;
 import com.post.interfaces.Serialized;
 import com.post.utils.Input;
 import com.post.utils.Output;
@@ -13,10 +14,11 @@ import java.io.IOException;
  */
 public class Application {
 
-    private final ApacheKafkaAPI apacheKafkaAPI;
+    //private final ApacheKafkaAPI apacheKafkaAPI;
+    private final Sender sender;
     private final Input input;
-    public Application(ApacheKafkaAPI apacheKafkaAPI, Input input) throws IOException {
-        this.apacheKafkaAPI = apacheKafkaAPI;
+    public Application(Sender sender, Input input) throws IOException {
+        this.sender = sender;
         this.input = input;
         startApp();
     }
@@ -50,8 +52,8 @@ public class Application {
         // id and isSolved are not supposed to be set, because they're handled by MongoConsumer.class
         Serialized reportForm =  new ReportDTO(victimFirstName, victimLastName, victimAddress, victimEventDetails);
 
-        String json = apacheKafkaAPI.serializeToJSON(reportForm);
-        apacheKafkaAPI.postRequest(json, "publish");
+        String json = sender.serializeToJSON(reportForm);
+        sender.postRequest(json, "publish");
     }
 }
 

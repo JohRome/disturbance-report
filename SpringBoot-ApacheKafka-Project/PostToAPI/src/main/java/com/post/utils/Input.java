@@ -31,7 +31,7 @@ public class Input {
         while (true) {
             stringInput = userInput.nextLine();
             // regex is used here to check for unwanted characters, which are not supported by the HTTP Client
-            boolean isCorrect = !stringInput.isEmpty() && !stringInput.isBlank() && !stringInput.matches(".*[åäö].*");
+            boolean isCorrect = !stringInput.isEmpty() && !stringInput.isBlank() && !stringInput.matches(".*[åäöÅÄÖ].*");
 
             if (isCorrect)
                 return stringInput;
