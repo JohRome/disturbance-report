@@ -36,24 +36,30 @@ public class ConsoleConsumer {
         LOGGER.info("This was consumed -> {}", jsonMessage);
     }
 
-    public static void printAllMessagesInTopic(String topicName) {
+    /**
+     * Creates a Kafka consumer and subscribes to a specified topic, then prints all messages in the topic to the console.
+     *
+     * @param topicName The name of the topic to which the consumer will subscribe.
+     * @param groupId   The consumer group ID.
+     */
+    public static void printAllMessagesInTopic(String topicName, String groupId) { // Inspiration from: Teacher Marcus.H and ChatGPT
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092, localhost:9093, localhost:9094");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class.getName());
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "all-messages-in-topic");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 
 
         Consumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList(topicName));
 
-        consumer.poll(0); // Seek to the beginning of the topic
+        consumer.poll(0);
         consumer.seekToBeginning(consumer.assignment());
 
         while (true) {
-            var records = consumer.poll(Duration.ofMillis(100)); // Poll for new records
+            var records = consumer.poll(Duration.ofMillis(100));
             if (records.isEmpty()) {
-                break; // No more records
+                break;
             }
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("Retrieved message: " + record.value());
