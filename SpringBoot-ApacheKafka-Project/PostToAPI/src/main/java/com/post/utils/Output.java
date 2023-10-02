@@ -15,7 +15,8 @@ public class Output {
         log.info("""
                 ----------------------------------------- MENU OPTIONS -------------------------------------------------
                 1 - Disturbing neighbor? Are you sleepless at night because of noises? Don't worry, just file a complaint
-                2 - Exit program
+                2 - Print all messages in a Kafka topic
+                3 - Exit program
                 ----------------------------------------- MAKE A CHOICE ------------------------------------------------
                 """);
     }

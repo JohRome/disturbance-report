@@ -37,12 +37,34 @@ public class ConsoleConsumer {
     }
 
     /**
-     * Creates a Kafka consumer and subscribes to a specified topic, then prints all messages in the topic to the console.
+     * Prints all messages in a Kafka topic to the console.
      *
      * @param topicName The name of the topic to which the consumer will subscribe.
      * @param groupId   The consumer group ID.
      */
     public static void printAllMessagesInTopic(String topicName, String groupId) { // Inspiration from: Teacher Marcus.H and ChatGPT
+        Consumer<String, String> consumer = consumerSetUp(topicName, groupId);
+
+        while (true) {
+            var records = consumer.poll(Duration.ofMillis(100));
+            if (records.isEmpty()) {
+                break;
+            }
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.println("Retrieved message: " + record.value());
+            }
+        }
+        consumer.close();
+    }
+
+    /**
+     * Creates a Kafka consumer and subscribes to a specified topic, read from the beginning.
+     *
+     * @param topicName The name of the topic to which the consumer will subscribe.
+     * @param groupId   The consumer group ID.
+     */
+
+    private static Consumer<String, String> consumerSetUp(String topicName, String groupId) {
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092, localhost:9093, localhost:9094");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
@@ -55,17 +77,7 @@ public class ConsoleConsumer {
 
         consumer.poll(0);
         consumer.seekToBeginning(consumer.assignment());
-
-        while (true) {
-            var records = consumer.poll(Duration.ofMillis(100));
-            if (records.isEmpty()) {
-                break;
-            }
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.println("Retrieved message: " + record.value());
-            }
-        }
-        consumer.close();
+        return consumer;
     }
 }
 

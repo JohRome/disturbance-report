@@ -36,7 +36,8 @@ public class Input {
             if (isCorrect)
                 return stringInput;
             else
-                Output.printError("Input mismatch! Try again, fool -> ");
+                log.info("Input mismatch! Try again, fool -> ");
+                //Output.printError("Input mismatch! Try again, fool -> ");
         }
     }
 
