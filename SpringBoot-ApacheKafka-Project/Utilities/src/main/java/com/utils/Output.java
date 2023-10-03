@@ -1,18 +1,19 @@
 package com.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Utility class for displaying output to the console, providing methods for printing menus, prompts, and error messages.
  */
-//@Slf4j
+@Slf4j
 public class Output {
 
     /**
      * Displays the main menu options to the console.
      */
     public static void printPostToAPIMenu() {
-        System.out.println("""
+        log.info("""
                 ----------------------------------------- MENU OPTIONS -------------------------------------------------
                 1 - File a complaint
                 2 - Print all messages in a Kafka topic
@@ -27,6 +28,7 @@ public class Output {
      * @param prompt The prompt message to be displayed.
      */
     public static void printPrompt(String prompt) {
+        // sout instead of log.info used because of unwanted new line
         System.out.print(prompt);
     }
 
@@ -36,6 +38,7 @@ public class Output {
      * @param error The error message to be displayed.
      */
     public static void printError(String error) {
+        // sout instead of log.info used because of unwanted new line
         System.out.println(error);
     }
 }
