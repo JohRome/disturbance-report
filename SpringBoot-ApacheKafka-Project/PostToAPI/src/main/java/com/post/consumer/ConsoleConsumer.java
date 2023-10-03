@@ -45,13 +45,15 @@ public class ConsoleConsumer {
     public static void printAllMessagesInTopic(String topicName, String groupId) { // Inspiration from: Teacher Marcus.H and ChatGPT
         Consumer<String, String> consumer = consumerSetUp(topicName, groupId);
 
+        log.info("Messages in the topic:");
         while (true) {
             var records = consumer.poll(Duration.ofMillis(100));
             if (records.isEmpty()) {
                 break;
             }
             for (ConsumerRecord<String, String> record : records) {
-                System.out.println("Retrieved message: " + record.value());
+                log.info(record.value());
+                //System.out.println("Retrieved message: " + record.value());
             }
         }
         consumer.close();
