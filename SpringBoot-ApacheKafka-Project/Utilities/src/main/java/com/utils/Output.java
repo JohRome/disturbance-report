@@ -28,7 +28,7 @@ public class Output {
      * @param prompt The prompt message to be displayed.
      */
     public static void printPrompt(String prompt) {
-        // sout instead of log.info used because of unwanted new line
+        // sout instead of log.info used because of unwanted new line break
         System.out.print(prompt);
     }
 
@@ -38,7 +38,7 @@ public class Output {
      * @param error The error message to be displayed.
      */
     public static void printError(String error) {
-        // sout instead of log.info used because of unwanted new line
+        // sout instead of log.info used because of unwanted new line break
         System.out.println(error);
     }
 }
