@@ -1,12 +1,12 @@
 package com.post.app;
 
-import com.post.api.ApacheKafkaAPI;
 import com.post.consumer.ConsoleConsumer;
 import com.post.dtos.ReportDTO;
 import com.post.interfaces.Sender;
 import com.post.interfaces.Serialized;
-import com.post.utils.Input;
-import com.post.utils.Output;
+
+import com.utils.Output;
+import com.utils.Input;
 
 import java.io.IOException;
 
@@ -14,8 +14,6 @@ import java.io.IOException;
  * Main application class responsible for user interaction and filing complaints through the ApacheKafkaAPI class.
  */
 public class Application {
-
-    //private final ApacheKafkaAPI apacheKafkaAPI;
     private final Sender sender;
     private final Input input;
     public Application(Sender sender, Input input) throws IOException {
@@ -31,7 +29,7 @@ public class Application {
      */
     private void startApp() throws IOException {
         while (true) {
-            Output.printMenu();
+            Output.printPostToAPIMenu();
             switch (input.integerInput()) {
                 case 1 -> fileADisturbanceReport();
                 case 2 -> ConsoleConsumer.printAllMessagesInTopic("disturbance-reports", "all-messages");

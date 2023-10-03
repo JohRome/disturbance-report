@@ -2,7 +2,8 @@ package com.post;
 
 import com.post.api.ApacheKafkaAPI;
 import com.post.app.Application;
-import com.post.utils.Input;
+
+import com.utils.Input;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

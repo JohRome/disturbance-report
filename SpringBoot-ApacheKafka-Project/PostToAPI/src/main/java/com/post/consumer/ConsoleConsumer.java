@@ -6,16 +6,12 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
+import static com.utils.JSONFormatter.prettyJSON;
 
 /**
  * Service class responsible for consuming JSON messages from a Kafka topic and printing them to the console.
@@ -23,18 +19,6 @@ import java.util.Properties;
 @Service
 @Slf4j
 public class ConsoleConsumer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleConsumer.class);
-
-    /**
-     * Kafka listener method that consumes JSON messages from the "disturbance-reports" topic and prints them to the console.
-     *
-     * @param jsonMessage The JSON message received from Kafka.
-     */
-    @KafkaListener(topics = "disturbance-reports", groupId = "console") // TODO: Think about if this method even needs to exist
-    public void printToConsole(String jsonMessage) {
-        LOGGER.info("This was consumed -> {}", jsonMessage);
-    }
 
     /**
      * Prints all messages in a Kafka topic to the console.
@@ -52,7 +36,8 @@ public class ConsoleConsumer {
                 break;
             }
             for (ConsumerRecord<String, String> record : records) {
-                log.info(record.value());
+                // static method from JSONFormatter.class in the Utilities module
+                prettyJSON(record.value());
             }
         }
         consumer.close();

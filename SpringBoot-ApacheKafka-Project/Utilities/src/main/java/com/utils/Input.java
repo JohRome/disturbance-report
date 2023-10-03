@@ -1,12 +1,12 @@
-package com.post.utils;
+package com.utils;
 
-import lombok.extern.slf4j.Slf4j;
+
 
 import java.util.Scanner;
 /**
  * Utility class for user input handling, providing methods for reading strings and integers from the console.
  */
-@Slf4j
+//@Slf4j
 public class Input {
 
     private final Scanner userInput;
@@ -36,8 +36,7 @@ public class Input {
             if (isCorrect)
                 return stringInput;
             else
-                log.info("Input mismatch! Try again, fool -> ");
-                //Output.printError("Input mismatch! Try again, fool -> ");
+                Output.printError("Input mismatch! Try again, fool -> ");
         }
     }
 
