@@ -55,7 +55,7 @@ public class Application {
         Serialized reportForm =  new ReportDTO(victimFirstName, victimLastName, victimAddress, victimEventDetails);
 
         String json = sender.serializeToJSON(reportForm);
-        sender.postRequest(json, "publish");
+        sender.postRequest(json,"publish");
     }
 }
 

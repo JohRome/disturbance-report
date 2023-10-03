@@ -53,7 +53,6 @@ public class ConsoleConsumer {
             }
             for (ConsumerRecord<String, String> record : records) {
                 log.info(record.value());
-                //System.out.println("Retrieved message: " + record.value());
             }
         }
         consumer.close();
