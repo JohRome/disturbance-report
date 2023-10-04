@@ -45,7 +45,6 @@ public class ReportEntity {
     private String id;
     private TheReportingPerson reportingPerson;
     private TheReportedPerson reportedPerson;
-
     private String eventDetails;
     private boolean isSolved;
 }

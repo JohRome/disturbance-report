@@ -10,14 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TheReportingPerson {
 
-    private String firstName;
-    private String lastName;
+    private PersonInfo personInfo;
     private Address address;
     private String eventDetails;
 
-    public TheReportingPerson(String firstName, String lastName, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public TheReportingPerson(PersonInfo personInfo, Address address) {
+        this.personInfo = personInfo;
         this.address = address;
     }
 }
