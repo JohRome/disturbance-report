@@ -3,6 +3,7 @@ package com.post.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.post.interfaces.Serialized;
 
+import pojos.Address;
 import pojos.Person;
 
 /**
@@ -40,12 +41,12 @@ public class ReportDTO implements Serialized {
     @JsonProperty
     private Person person;
     @JsonProperty
-    private String address;
+    private Address address;
     @JsonProperty
     private String eventDetails;
     @JsonProperty
     private boolean isSolved; // default value is false and later set to true by MongoDB admin
-    public ReportDTO(Person person, String address, String eventDetails) {
+    public ReportDTO(Person person, Address address, String eventDetails) {
         this.person = person;
         this.address = address;
         this.eventDetails = eventDetails;

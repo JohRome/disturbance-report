@@ -8,6 +8,7 @@ import com.post.interfaces.Serialized;
 
 import com.utils.Output;
 import com.utils.Input;
+import pojos.Address;
 import pojos.Person;
 
 import java.io.IOException;
@@ -49,11 +50,20 @@ public class Application {
         String victimFirstName = input.stringInput("Set victim's first name -> ");
         String victimLastName = input.stringInput("Set victim's last name -> ");
         var person = new Person(victimFirstName, victimLastName);
-        String victimAddress = input.stringInput("Set victim's address -> ");
+
+        String addressStreet = input.stringInput("Set victim's street -> ");
+        String addressApartmentNumber = input.stringInput("Set victim's apartment number -> ");
+        String addressCity = input.stringInput("Set victim's city -> ");
+        String addressZipCode = input.stringInput("Set victim's zip code -> ");
+        var address = new Address(addressStreet, addressApartmentNumber, addressCity, addressZipCode);
+
+
+
+        //String victimAddress = input.stringInput("Set victim's address -> ");
         String victimEventDetails = input.stringInput("Describe the event by providing details. What happened? -> ");
 
         // id and isSolved are not supposed to be set, because they're handled by MongoConsumer.class
-        Serialized reportForm =  new ReportDTO(person, victimAddress, victimEventDetails);
+        Serialized reportForm =  new ReportDTO(person, address, victimEventDetails);
 
         String json = sender.serializeToJSON(reportForm);
         sender.postRequest(json,"publish");

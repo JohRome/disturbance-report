@@ -14,5 +14,4 @@ public class Address {
     private String apartmentNumber;
     private String city;
     private String zipCode;
-
 }
