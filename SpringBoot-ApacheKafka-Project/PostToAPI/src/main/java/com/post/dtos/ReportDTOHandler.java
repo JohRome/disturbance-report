@@ -20,6 +20,7 @@ public class ReportDTOHandler {
         var personInfo = getPersonInfo();
         var address = getAddress();
 
+
         return new TheReportingPerson(personInfo, address);
     }
 
@@ -44,6 +45,7 @@ public class ReportDTOHandler {
     }
 
     public String createEventDetails() {
+        log.info("Give us a detailed description of the event, what happened?");
         return input.stringInput("Set event details -> ");
     }
 }

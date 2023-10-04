@@ -7,13 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class TheReportedPerson{
 
     private PersonInfo personInfo;
     private Address address;
-    public TheReportedPerson(PersonInfo personInfo, Address address) {
-        this.personInfo = personInfo;
-        this.address = address;
-    }
 }
