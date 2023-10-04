@@ -6,8 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pojos.Address;
-import pojos.Person;
+import pojos.TheReportedPerson;
+import pojos.TheReportingPerson;
 
 /**
  * Entity class representing a report in a MongoDB collection.
@@ -43,8 +43,8 @@ public class ReportEntity {
      */
     @Id
     private String id;
-    private Person person;
-    private Address address;
+    private TheReportingPerson reportingPerson;
+    private TheReportedPerson reportedPerson;
     private String eventDetails;
     private boolean isSolved;
 }
