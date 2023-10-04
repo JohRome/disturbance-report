@@ -9,9 +9,6 @@ import com.post.interfaces.Serialized;
 
 import com.utils.Output;
 import com.utils.Input;
-import pojos.Address;
-import pojos.TheReportedPerson;
-import pojos.TheReportingPerson;
 
 import java.io.IOException;
 
@@ -46,20 +43,19 @@ public class Application {
     }
 
     /**
-     * Creates a report, which is composed by the ReportDTOHandler.class and sends it to the Kafka broker.
+     * Creates a report, which is composed by the ReportDTOHandler class and sends it to the Kafka broker.
      *
      * @throws IOException If an IO error occurs.
      */
-
     private void fileADisturbanceReport() throws IOException {
-        var theReportingPerson = reportDTOHandler.createReportingPerson();
-        var theReportedPerson = reportDTOHandler.createReportedPerson();
+        var theReportingPerson = reportDTOHandler.createPerson();
+        var theReportedPerson = reportDTOHandler.createPerson();
         String eventDetails = reportDTOHandler.createEventDetails();
 
-        Serialized reportForm =  new ReportDTO(theReportingPerson, theReportedPerson, eventDetails);
+        Serialized reportForm = new ReportDTO(theReportingPerson, theReportedPerson, eventDetails);
 
         String json = sender.serializeToJSON(reportForm);
-        sender.postRequest(json,"publish");
+        sender.postRequest(json, "publish");
     }
 }
 

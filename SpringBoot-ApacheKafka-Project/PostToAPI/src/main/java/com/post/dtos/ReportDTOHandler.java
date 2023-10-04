@@ -2,10 +2,8 @@ package com.post.dtos;
 
 import com.utils.Input;
 import lombok.extern.slf4j.Slf4j;
-import pojos.Address;
-import pojos.PersonInfo;
-import pojos.TheReportedPerson;
-import pojos.TheReportingPerson;
+import pojos.*;
+
 @Slf4j
 public class ReportDTOHandler {
     private final Input input;
@@ -13,21 +11,10 @@ public class ReportDTOHandler {
         this.input = input;
     }
 
-    public TheReportingPerson createReportingPerson() {
-        log.info("Enter your details");
+    public Person createPerson() {
         var personInfo = getPersonInfo();
         var address = getAddress();
-
-
-        return new TheReportingPerson(personInfo, address);
-    }
-
-    public TheReportedPerson createReportedPerson() {
-        log.info("Enter the details of the person you are reporting");
-        var personInfo = getPersonInfo();
-        var address = getAddress();
-
-        return new TheReportedPerson(personInfo, address);
+        return new Person(personInfo, address);
     }
     private Address getAddress() {
         String street = input.stringInput("Set street name -> ");

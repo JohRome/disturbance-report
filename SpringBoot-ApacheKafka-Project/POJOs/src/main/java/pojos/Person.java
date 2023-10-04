@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class TheReportedPerson{
-
+@AllArgsConstructor
+public class Person {
     private PersonInfo personInfo;
     private Address address;
 }
