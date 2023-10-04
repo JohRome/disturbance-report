@@ -44,17 +44,6 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mongodb/bson -->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>bson</artifactId>
-            <version>4.10.2</version>
-        </dependency>
-
-
-
-
-
 
     </dependencies>
 

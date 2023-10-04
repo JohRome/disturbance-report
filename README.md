@@ -84,6 +84,7 @@ Sometimes, things go wrong for whatever reason. The most common of reasons, that
 + [Mongo Driver Core 4.10.2](https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core)
 + [Logback Classic 1.4.11](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.4.11)
 + [Apache Http Client5 5.2.1](https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5)
++ And more in the pom.xml files.
 
 ---
 ### License

@@ -15,7 +15,7 @@ public class Output {
     public static void printPostToAPIMenu() {
         log.info("""
                 ----------------------------------------- MENU OPTIONS -------------------------------------------------
-                1 - File a complaint
+                1 - File a Disturbance Report
                 2 - Print all messages in a Kafka topic
                 3 - Exit program
                 ----------------------------------------- MAKE A CHOICE ------------------------------------------------

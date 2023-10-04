@@ -14,7 +14,7 @@ I sin helhet låter applikationen användaren:
 Arbetet började med att förstå konceptet i hur man använder Apache Kafka som integrationsplattform och jag använde mig då av [den här spellistan](https://www.youtube.com/playlist?list=PLGRDMO4rOGcNLwoack4ZiTyewUcF6y6BU).  
 Jag valde sedan att komma på en idé om hur jag ville forma mitt egna program - Jag kom på vad för typ av data jag vill skicka, hur denna data ska skickas och behandlas och även vilken databas som ska lagra datan.
 ### Vad som varit svårt
-Själva implementationen i applikationen har inte varit så värst komplicerad, utan det svåraste har varit strukturen i projektet.  
+Själva implementationen i applikationen har inte varit omöjlig, utan det svåraste har varit strukturen i projektet och att modulerna har varit bråkiga under hela projektets gång.  
 En felplacerad klass i en modul kan ha förödande konsekvenser och göra programmet helt okörbart. Därför är det av största vikt att ha tydliga ansvarsområden för varje enskild modul, så att de ej "krockar" med en annan modul.  
 Något som var besvärligt till en början var även att låta en modul ha en annan modul som en dependency.
 ### Beskriv lite olika lösningar du gjort samt motiveringar till dessa
@@ -36,18 +36,24 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 
 
   + ReportRepository:
-    + *Lösning:* Gör det möjligt för MongoConsumer att enkelt spara data i MongoDB
+    + *Lösning:* Gör det möjligt för MongoConsumer att enkelt spara data i MongoDB.
 ---
 
 + **KafkaProducer-modulen**
   + KafkaProducer:
     + *Lösning:* Ansvarar för att skicka data, genom en JSON-sträng som inparameter, till en specifik Topic med hjälp av en MessageBuilder. Ansvarar även för att fånga upp eventuella fel så att program inte kraschar*
-    +*Motivering:* Genom att låta Producern skicka en JSON-sträng istället för ett Java-objekt slipper jag ha ännu en klass som behöver representera datan jag skickar. I en tidigare lösning hade jag just det, och det medförde massa trassel. Dels pga att jag inte visste till en början att man inte kunde "circulera" klasser som tillhörde en modul, utan behövde göra en helt separat modul som t.ex håller alla DTO-klasser. Enligt mig så är det enklare och snyggare att skicka en JSON-sträng och låta varje modul välja hur denne vill handskas med datan, genom Singel Responsibility principen.
+    + *Motivering:* Genom att låta Producern skicka en JSON-sträng istället för ett Java-objekt slipper jag ha ännu en klass som behöver representera datan jag skickar. I en tidigare lösning hade jag just det, och det medförde massa trassel. Dels pga att jag inte visste till en början att man inte kunde "circulera" klasser som tillhörde en modul, utan behövde göra en helt separat modul som t.ex håller alla DTO-klasser. Enligt mig så är det enklare och snyggare att skicka en JSON-sträng och låta varje modul välja hur denne vill handskas med datan, genom Singel Responsibility principen.
   
   
   + RestController: 
     + *Lösning:* Sätter upp ett API med en endpoint som gör det möjligt att låta användaren skicka data med en POST-request. Metoden tar emot en JSON-sträng samt fångar eventuella Response-fel*
     +*Motivering:* Egentligen samma motivering som för KafkaProducer. JSON-string blir enklare att hantera i det långa loppet, då jag anser att det är enklare att skicka en JSON-sträng än ett Java-objekt. Felhanteringen gör även att programmet inte kraschar lika lätt.
+---
+
++ **POJOs-modulen**
+  + *Lösning:* POJO klasser som behövs av både PostToAPI-modulen och KafkaMongoConsumer-modulen.
+  + *Motivering:* Detta gör att andra moduler som behöver använda sig av dessa klasser kan göra det utan att behöva skapa egna klasser, vilket hade brutit mot DRY-principen samt att det blir snyggare.
+
 ---
 
 + **PostToAPI-modulen**
@@ -57,17 +63,21 @@ Något som var besvärligt till en början var även att låta en modul ha en an
  
 
   + Application:
-    + *Lösning:* Tillåter användaren att loopa programmet tills det att han bestämmer sig för att avsluta applikationen.
+    + *Lösning:* Ger användaren olika menyval och tillåter även att loopa programmet tills det att användaren bestämmer sig för att avsluta applikationen.
    
 
   + ConsoleConsumer:
-    + *Lösning:* Skriver ut data som skickas från ApacheKafkaAPI i JSON-format till konsolen.
+    + *Lösning:* På begäran skrivs alla messages i en topic ut i konsolen till användaren i ett snyggare JSON-format tack vare en utility klass.
+    + *Motivering:* Tidigare lösning var att Consumern skrev ut så fort något hade skickats mot API:et, men efter att ha följt en lektion av min lärare, Marcus.H, så bestämde jag mig att göra om det till nuvarande implementation istället. Dock så är metoden i fråga static, vilket jag personligen inte hade valt eftersom det kommer bli svårare att skriva tester på den, men den gör sitt jobb väl så jag är nöjd. 
    
 
   + ReportDTO:
-    + *Lösning:* Implementerar Serialized. Skapar en mall för hur data ska se ut när den skickas till API:et.
+    + *Lösning:* Implementerar Serialized. Skapar en mall för hur data ska se ut när den skickas mot API:et.
     + *Motivering:* Här har jag däremot valt att skapa en DTO-klass för att representera data. Detta gör det lättare att hantera användarens input samt att det är lättare att låta ett bibliotek konvertera data till JSON-format istället för att skriva det själv.
-   
+
+  + ReportDTOHandler:
+    + *Lösning:* Ansvarar för att skapa en ReportDTO.
+    + *Motivering:* Jag ville ha en separat klass som utför skapandet istället för Application-klassen. Varför jag gjorde detta var för att jag inte ville sprida ut ansvarsområden över flera klasser, och istället låta en hantera detta. Detta medför att jag kan lättare felsöka om något skulle gå fel.
 
   + Sender(Interface):
     + *Lösning:* Gör det möjligt för klasser som implementerar dessa metoder att implementera dem hur de själva vill. 
@@ -78,11 +88,19 @@ Något som var besvärligt till en början var även att låta en modul ha en an
     + *Lösning:* Ett interface avsedd för alla DTO-klasser.
     + *Motivering:* När DTO-klasser implementerar detta interface ges möjligheten för ApacheKafkaAPI att kunna ta emot en Serialized som inparameter, istället för varje enskild DTO. I skrivande stund är ReportDTO den enda klassen, men om det hade funnits fler klasser så slipper man att skriva en metod för varje klass.
    
+---
 
-  + Input:
-    + *Lösning:* Ansvarar för att ta användarens input.
-    + *Motivering:* Att se till att data som matas in är korrekt så att det förhindrar problem vidare i programmet är av största vikt. Används felaktiga värden, som "åäö" t.ex, så bes användaren att mata in korrekt värde till det att kravet uppnås. Detta medför att programmet inte kraschar lika lätt.
++ **Utilities-modulen**
+  + *Lösning:* Tidigare lösning var att ha nedanstående klasser inuti PostToAPI-modulen men jag valde att flytta dem till Utilities-modulen istället.
+  + *Motivering:* Väljer jag att bygga ut programmet i framtiden kommer jag behöva dessa klasser och då är det bättre att kunna lägga till Utilities som en dependency istället för att skriva om allting på nytt.
+
+    + Input:
+      + *Lösning:* Ansvarar för att ta användarens input.
+      + *Motivering:* Att se till att data som matas in är korrekt så att det förhindrar problem vidare i programmet är av största vikt. Används felaktiga värden, som "åäö" t.ex, så bes användaren att mata in korrekt värde till det att kravet uppnås. Detta medför att programmet inte kraschar lika lätt.
   
+    + JSONFormatter:
+      + *Lösning:* Ansvarar för att formatera JSON-strängar till ett snyggare format.
+      + *Motivering:* Detta gör att det blir lättare att läsa JSON-strängar i konsolen.
 
   + Output:
     + *Lösning:* Skriver ut menyalternativ för användaren samt meddelar om input är ej korrekt.
@@ -97,6 +115,8 @@ Det som än idag skaver är att jag inte lyckats automatisera ledarbytet när en
 Min första lösning var att ha 3 olika program. Ett program skulle sköta Apache Kafka, ett program skulle sköta allt med POST-request samt att låta användaren fylla i formuläret, ett program skulle låta en användare, som i själva verket skulle vara en "hyresvärd"/"styrelse", utföra CRUDL-operationer mot databasen för att bla kunna markera ärendet som löst, aka IsSolved = true.
 Detta visade sig bli otroligt rörigt, pga att du och jag som användare, blev då tvungna att ha flera fönster uppe och körandes samtidigt.
 Jag valde därför att göra om programmet till ett enda program, där allt sköts i ett och samma fönster. Detta gjorde att jag kunde få en bättre överblick över vad som hände i programmet och det blev även lättare att felsöka.
+---
+Efter att ha experimenterat lite ytterligare efter ovan rad var skriven så bestämde jag mig för att ändra om lite i programmet och skapa nya moduler för att vissa delar i programmet kan återanvändas istället för att göras om på nytt.
 ## Slutsatser
 Överlag är jag mycket visare och klokare än vad jag var när jag precis började med projektet. Detta är något jag kommer att ta med mig som minne och vidareutveckla på ännu mer i kommande kurser och i arbetslivet.
 Programmet i sin helhet är ganska okomplicerat och det är lätt att förstå vad som händer. Att följa med i koden är inte heller så svårt.
