@@ -3,6 +3,7 @@ package com.post;
 import com.post.api.ApacheKafkaAPI;
 import com.post.app.Application;
 
+import com.post.dtos.ReportDTOHandler;
 import com.utils.Input;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,7 @@ public class PostApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        new Application(new ApacheKafkaAPI(), new Input());
+        var input = new Input();
+        new Application(new ApacheKafkaAPI(), input, new ReportDTOHandler(input));
     }
 }

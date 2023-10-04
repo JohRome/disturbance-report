@@ -13,6 +13,7 @@ public class TheReportingPerson {
     private String firstName;
     private String lastName;
     private Address address;
+    private String eventDetails;
 
     public TheReportingPerson(String firstName, String lastName, Address address) {
         this.firstName = firstName;
