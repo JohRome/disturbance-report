@@ -9,12 +9,10 @@ import pojos.TheReportingPerson;
 @Slf4j
 public class ReportDTOHandler {
     private final Input input;
-
     public ReportDTOHandler(Input input) {
         this.input = input;
     }
 
-    // TODO: Extract code duplication to a separate method
     public TheReportingPerson createReportingPerson() {
         log.info("Enter your details");
         var personInfo = getPersonInfo();
