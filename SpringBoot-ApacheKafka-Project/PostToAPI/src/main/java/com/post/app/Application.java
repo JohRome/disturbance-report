@@ -43,7 +43,7 @@ public class Application {
     }
 
     /**
-     * Creates a report, which is composed by the ReportDTOHandler class and sends it to the Kafka broker.
+     * Creates a disturbance report, which is composed by the ReportDTOHandler class and sends it to Kafka API endpoint.
      *
      * @throws IOException If an IO error occurs.
      */
