@@ -18,7 +18,7 @@ import java.beans.BeanProperty;
 import java.io.IOException;
 
 /**
- * Main application class responsible for user interaction and filing complaints through the ApacheKafkaAPI class.
+ * Main application class responsible for user interaction and filing disturbance reports through the ApacheKafkaAPI class.
  */
 @Component
 public class Application {

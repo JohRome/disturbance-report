@@ -3,7 +3,10 @@ package com.post.dtos;
 import com.utils.Input;
 import lombok.extern.slf4j.Slf4j;
 import pojos.*;
-
+/**
+ * The ReportDTOHandler class is responsible for handling the creation of DTOs (Data Transfer Objects) related to reports.
+ * It provides methods for creating Person objects, collecting address information, and gathering event details.
+ */
 @Slf4j
 public class ReportDTOHandler {
     private final Input input;
