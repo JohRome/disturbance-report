@@ -26,7 +26,7 @@ public class ConsoleConsumer {
      * @param topicName The name of the topic to which the consumer will subscribe.
      * @param groupId   The consumer group ID.
      */
-    public static void printAllMessagesInTopic(String topicName, String groupId) { // Inspiration from: Teacher Marcus.H and ChatGPT
+    public void printAllMessagesInTopic(String topicName, String groupId) { // Inspiration from: Teacher Marcus.H and ChatGPT
         Consumer<String, String> consumer = consumerSetUp(topicName, groupId);
 
         log.info("Messages in the topic:");
@@ -50,7 +50,7 @@ public class ConsoleConsumer {
      * @param groupId   The consumer group ID.
      */
 
-    private static Consumer<String, String> consumerSetUp(String topicName, String groupId) {
+    private Consumer<String, String> consumerSetUp(String topicName, String groupId) {
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092, localhost:9093, localhost:9094");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());

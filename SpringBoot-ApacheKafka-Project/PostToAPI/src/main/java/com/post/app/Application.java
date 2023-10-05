@@ -9,20 +9,29 @@ import com.post.interfaces.Serialized;
 
 import com.utils.Output;
 import com.utils.Input;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.beans.BeanProperty;
 import java.io.IOException;
 
 /**
  * Main application class responsible for user interaction and filing complaints through the ApacheKafkaAPI class.
  */
+@Component
 public class Application {
     private final Sender sender;
     private final Input input;
     private final ReportDTOHandler reportDTOHandler;
-    public Application(Sender sender, Input input, ReportDTOHandler reportDTOHandler) throws IOException {
+    private final ConsoleConsumer consumer;
+    @Autowired
+    public Application(Sender sender, Input input, ReportDTOHandler reportDTOHandler, ConsoleConsumer consumer) throws IOException {
         this.sender = sender;
         this.input = input;
         this.reportDTOHandler = reportDTOHandler;
+        this.consumer = consumer;
         startApp();
     }
 
@@ -31,12 +40,12 @@ public class Application {
      *
      * @throws IOException If an IO error occurs.
      */
-    private void startApp() throws IOException {
+    public void startApp() throws IOException {
         while (true) {
             Output.printPostToAPIMenu();
             switch (input.integerInput()) {
                 case 1 -> fileADisturbanceReport();
-                case 2 -> ConsoleConsumer.printAllMessagesInTopic("disturbance-reports", "all-messages");
+                case 2 -> consumer.printAllMessagesInTopic("disturbance-reports", "all-messages");
                 case 3 -> System.exit(0);
             }
         }
