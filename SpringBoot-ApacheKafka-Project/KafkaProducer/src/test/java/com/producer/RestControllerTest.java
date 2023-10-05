@@ -1,6 +1,7 @@
 package com.producer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.producer.controller.RestController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -29,7 +30,7 @@ class RestControllerTest {
     @Test
     void testPublish() throws Exception {
         doNothing().when(kafkaProducer).sendToTopic(Mockito.<String>any());
-        MockHttpServletRequestBuilder contentTypeResult = MockMvcRequestBuilders.post("/api/v1/reports/publish")
+        MockHttpServletRequestBuilder contentTypeResult = MockMvcRequestBuilders.post("/api/v1/reports/post")
                 .contentType(MediaType.APPLICATION_JSON);
         MockHttpServletRequestBuilder requestBuilder = contentTypeResult
                 .content((new ObjectMapper()).writeValueAsString("foo"));

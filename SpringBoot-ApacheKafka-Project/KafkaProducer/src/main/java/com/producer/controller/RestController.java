@@ -1,8 +1,7 @@
-package com.producer;
+package com.producer.controller;
 
+import com.producer.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,7 @@ public class RestController {
      * @param jsonMessage The JSON message received in the request body.
      * @return A ResponseEntity indicating the status of the operation.
      */
-    @PostMapping("/publish")
+    @PostMapping("/post")
     public ResponseEntity<String> send(@RequestBody String jsonMessage) {
         try {
             kafkaProducer.sendToTopic(jsonMessage);
