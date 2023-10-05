@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.post.interfaces.Sender;
 import com.post.interfaces.Serialized;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.HttpHostConnectException;
 import org.apache.hc.client5.http.HttpResponseException;
@@ -19,7 +20,10 @@ import java.io.IOException;
  * Implementation class for sending HTTP POST requests to a Kafka API endpoint.
  */
 @Slf4j
+@Getter
 public class ApacheKafkaAPI implements Sender {
+    // variable to store the HTTP response code for testing purpose
+    private int httpResponseCode;
 
     /**
      * Sends an HTTP POST request with a JSON message to a specified API endpoint.
@@ -44,7 +48,7 @@ public class ApacheKafkaAPI implements Sender {
 
             // executing the POST request and checking the response code
             try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
-                int httpResponseCode = response.getCode();
+                httpResponseCode = response.getCode();
                 if (httpResponseCode == 200)
                     log.info("Response code: " + httpResponseCode + " - POST request was successful");
             } catch (HttpResponseException | HttpHostConnectException e) {

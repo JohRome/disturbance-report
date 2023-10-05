@@ -1,5 +1,6 @@
 package com.post.consumer;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -18,7 +19,10 @@ import static com.utils.JSONFormatter.prettyJSON;
  */
 @Service
 @Slf4j
+@Getter
 public class ConsoleConsumer {
+    // Array to store one message for testing purposes
+    String[] message = new String[1];
 
     /**
      * Prints all messages in a Kafka topic to the console.
@@ -36,6 +40,7 @@ public class ConsoleConsumer {
                 break;
             }
             for (ConsumerRecord<String, String> record : records) {
+                message[0] = record.value();
                 // static method from JSONFormatter.class in the Utilities module
                 prettyJSON(record.value());
             }
