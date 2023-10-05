@@ -87,7 +87,7 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 
   + Serialized(Interface):
     + *Lösning:* Ett interface avsedd för alla DTO-klasser.
-    + *Motivering:* När DTO-klasser implementerar detta interface ges möjligheten för ApacheKafkaAPI att kunna ta emot en Serialized som inparameter, istället för varje enskild DTO. I skrivande stund är ReportDTO den enda klassen, men om det hade funnits fler klasser så slipper man att skriva en metod för varje klass.
+    + *Motivering:* När DTO-klasser implementerar detta interface ges möjligheten för ApacheKafkaAPI, eller en annan klass som implementerar Sender-interface, att kunna ta emot en Serialized som inparameter, istället för varje enskild DTO. I skrivande stund är ReportDTO den enda klassen, men om det hade funnits fler klasser så slipper man att skriva en metod för varje klass.
    
 ---
 
