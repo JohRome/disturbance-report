@@ -21,13 +21,13 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 + **KafkaConfig-modulen**
   + TopicConfig: 
     + *Lösning:* Skapande av Topic med ett valt namn, replikering och partitionering
-    + *Motivering:* Tack vare att programmet har 3 Brokers får varje Broker en partition. Detta gör att programmet kan fortsätta fungera även om en Broker försvinner. Nackdelen med detta är att det är en större mängd data som skickas men jag anser att det är nödvändigt för att programmet ska fungera optimalt, då det minskar risken för att data går förlorad.
+    + *Motivering:* Tack vare att programmet har 3 Brokers får varje Broker en partition. Detta gör att programmet kan fortsätta fungera även om en Broker försvinner. Nackdelen med detta är att det är en större mängd data som skickas men jag anser att det är nödvändigt för att programmet ska fungera optimalt.
 ---
 
 + **KafkaMongoConsumer-modulen**
   + ReportEntity: 
     + *Lösning:* Skapande av en mall för hur data ska se ut när den skickas till MongoDB
-    + *Motivering:* Av det jag har testat hittills så är det smidigast att ha en entitet-klass som representerar data som går in i MongoDB. Annoteringarna gör användningen ännu lättare, t.ex @Id som genererar ett automatiskt ObjectId.
+    + *Motivering:* Av det jag har testat hittills så är det smidigast att ha en entitet-klass som representerar data i form av ett Document som går in i MongoDB. Annoteringarna gör användningen ännu lättare, t.ex @Id som genererar ett automatiskt ObjectId.
 
 
   + MongoConsumer:
@@ -41,13 +41,13 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 
 + **KafkaProducer-modulen**
   + KafkaProducer:
-    + *Lösning:* Ansvarar för att skicka data, genom en JSON-sträng som inparameter, till en specifik Topic med hjälp av en MessageBuilder. Ansvarar även för att fånga upp eventuella fel så att program inte kraschar*
+    + *Lösning:* Ansvarar för att skicka data, genom en JSON-sträng som inparameter, till en specifik Topic med hjälp av en MessageBuilder. Ansvarar även för att fånga upp eventuella fel så att program inte kraschar.
     + *Motivering:* Genom att låta Producern skicka en JSON-sträng istället för ett Java-objekt slipper jag ha ännu en klass som behöver representera datan jag skickar. I en tidigare lösning hade jag just det, och det medförde massa trassel. Dels pga att jag inte visste till en början att man inte kunde "circulera" klasser som tillhörde en modul, utan behövde göra en helt separat modul som t.ex håller alla DTO-klasser. Enligt mig så är det enklare och snyggare att skicka en JSON-sträng och låta varje modul välja hur denne vill handskas med datan, genom Singel Responsibility principen.
   
   
   + RestController: 
-    + *Lösning:* Sätter upp ett API med en endpoint som gör det möjligt att låta användaren skicka data med en POST-request. Metoden tar emot en JSON-sträng samt fångar eventuella Response-fel*
-    +*Motivering:* Egentligen samma motivering som för KafkaProducer. JSON-string blir enklare att hantera i det långa loppet, då jag anser att det är enklare att skicka en JSON-sträng än ett Java-objekt. Felhanteringen gör även att programmet inte kraschar lika lätt.
+    + *Lösning:* Sätter upp ett API med en endpoint som gör det möjligt att låta användaren skicka data med en POST-request. Metoden tar emot en JSON-sträng samt fångar eventuella Response-fel.
+    + *Motivering:* Egentligen samma motivering som för KafkaProducer. JSON-string blir enklare att hantera i det långa loppet, då jag anser att det är enklare att skicka en JSON-sträng än ett Java-objekt. Felhanteringen gör även att programmet inte kraschar lika lätt.
 ---
 
 + **POJOs-modulen**
@@ -58,12 +58,13 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 
 + **PostToAPI-modulen**
   + ApacheKafkaAPI:
-    + *Lösning:* Här utförs själva HTTP POST-request med hjälp av Apache HTTP client och ser till att data som ska skickas är i JSON-format genom Spring Boots integrerade bibliotek, ObjectMapper
-    + *Motivering:* Jag valde att använda mig av Apache HTTP client för att utföra POST-requesten, då jag tyckte att det var enkelt att använda och det var enkelt att få till en fungerande POST-request. Jag valde även att använda mig av Spring Boots integrerade bibliotek, ObjectMapper, för att konvertera data till JSON-format. Detta gjorde att jag slapp använda mig av ytterligare ett bibliotek för att konvertera data till JSON-format.
+    + *Lösning:* Här utförs själva HTTP POST-request med hjälp av Apache HTTP client och ser till att data som ska skickas är i JSON-format genom Spring Boots integrerade dependency, Jackson.
+    + *Motivering:* Jag valde att använda mig av Apache HTTP client för att utföra POST-requesten, då jag tyckte att det var enkelt att använda och det var enkelt att få till en fungerande POST-request. Jag valde även att använda mig av Spring Boots integrerade dependency för att konvertera data till JSON-format. Detta gjorde att jag slapp använda mig av ytterligare dependencies.  
+
  
 
   + Application:
-    + *Lösning:* Ger användaren olika menyval och tillåter även att loopa programmet tills det att användaren bestämmer sig för att avsluta applikationen.
+    + *Lösning:* Ger användaren olika menyval och tillåter även att loopa programmet tills det att användaren bestämmer sig för att avsluta.
    
 
   + ConsoleConsumer:
@@ -72,8 +73,8 @@ Något som var besvärligt till en början var även att låta en modul ha en an
    
 
   + ReportDTO:
-    + *Lösning:* Implementerar Serialized. Skapar en mall för hur data ska se ut när den skickas mot API:et.
-    + *Motivering:* Här har jag däremot valt att skapa en DTO-klass för att representera data. Detta gör det lättare att hantera användarens input samt att det är lättare att låta ett bibliotek konvertera data till JSON-format istället för att skriva det själv.
+    + *Lösning:* Implementerar Serialized. Skapar en mall för hur JSON-strängen ska se ut när den skickas mot API:et.
+    + *Motivering:* Här har jag däremot valt att skapa en DTO-klass för att representera data. Detta gör det lättare att lägga in användarens input till varje fält samt att det är lättare att låta ett bibliotek konvertera data till JSON-format istället för att skriva det själv.
 
   + ReportDTOHandler:
     + *Lösning:* Ansvarar för att skapa en ReportDTO.
@@ -96,15 +97,15 @@ Något som var besvärligt till en början var även att låta en modul ha en an
 
     + Input:
       + *Lösning:* Ansvarar för att ta användarens input.
-      + *Motivering:* Att se till att data som matas in är korrekt så att det förhindrar problem vidare i programmet är av största vikt. Används felaktiga värden, som "åäö" t.ex, så bes användaren att mata in korrekt värde till det att kravet uppnås. Detta medför att programmet inte kraschar lika lätt.
+      + *Motivering:* Att se till att data som matas in är korrekt så att det förhindrar problem vidare i programmet är av största vikt. Används felaktiga värden, som "åäöÅÄÖ" t.ex, så bes användaren att mata in korrekt värde till det att kravet uppnås. Detta medför att programmet inte kraschar lika lätt och att det inte dyker upp konstiga tecken i MongoDB.
   
     + JSONFormatter:
       + *Lösning:* Ansvarar för att formatera JSON-strängar till ett snyggare format.
-      + *Motivering:* Detta gör att det blir lättare att läsa JSON-strängar i konsolen.
+      + *Motivering:* Detta gör att det blir lättare att läsa JSON-strängar i konsolen. I nuläget hade jag egentligen kunnat skippa att bygga en hel klass för detta, eftersom det bara är en metod i dagsläget som använder sig utav den. Detta kommer dock att visa sig vara bra i framtiden när jag vill bygga vidare på projektet.
 
-  + Output:
-    + *Lösning:* Skriver ut menyalternativ för användaren samt meddelar om input är ej korrekt.
-    + *Motivering:* Jag vill inte att menyval ska ligga i Application-klassen och jag vill inte ha print-outs inne i Input-klassen.
+    + Output:
+      + *Lösning:* Skriver ut menyalternativ för användaren samt meddelar om input är ej korrekt.
+      + *Motivering:* I nuläget en liten klass, men återigen, när jag vidareutvecklar programmet kommer jag att behöva fler menyer bla, och då är det bra att ha en klass som sköter detta.
 ---
 
 ### Beskriv något som var besvärligt att få till
@@ -128,12 +129,12 @@ Något som var dåligt är helt klart att jag inte lyckats få löst Broker2-pro
 Jag har lärt mig otroligt mycket under projektets gång och för att inte lista upp allting så listar jag upp enbart det viktigaste:
 + En grundlig överblick över hur man kan använda Spring Boot för att lätt kunna skriva en applikation från grunden.
 + Att kunna sätta upp ett Apache Kafka-kluster med 3 Brokers för att få en högre säkerhet i programmet.
-+ Att kunna sätta upp ett API med hjälp av Spring Boot för att kunna ta emot data från en användare.
-+ Att kunna skicka data från en användare, från en klient, till en server med hjälp av Apache Kafka som integrationslösning.
++ Att snabbt och enkelt kunna sätta upp ett API med hjälp av Spring Boot för att låta en användare göra en POST-request.
++ Att kunna skicka data från klientsidan, till en server med hjälp av Apache Kafka som integrationslösning.
 + Förstå kraften av Spring Boot applikationer och hur mycket "hjälp på vägen" det medför när mycket av koden är redan skriven och med hjälp av @Annoteringar kunna diktera hur koden ska bete sig.
 + Förstå hur viktigt det är att ha tydliga ansvarsområden för varje modul och att inte låta en modul göra för mycket.
 ### Vad hade du gjort annorlunda om du gjort om projektet
 Hade jag börjat om projektet från grunden hade jag helt klart velat implementera min första lösning; att ha olika program för de olika användningsområdena. Detta hade gjort programmet mer modulärt och efterliknat "Microservice Architecture", vilket är ett koncept jag kommer på egen hand utforska i.
 ### Vilka möjligheter ser du med de kunskaper du fått under kursen.
 Efter snart avslutad kurs har jag fått en bra grund att stå på vad gäller integrationsplattformar. Just integrationsplattformar har öppnat upp en helt ny värld av vad som är möjligt att göra med, i detta fall, Apache Kafka.
-Jag ser fram emot att få utforska mer av Apache Kafka och dess möjligheter, samt att få utforska andra integrationsplattformar.
+Jag ser fram emot att få utforska mer av Apache Kafka och dess möjligheter, samt att få utforska fler integrationslösningar.
